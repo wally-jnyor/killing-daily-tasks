@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Old Standard TT';
+    src: url('@/assets/fonts/Old_Standard_TT/OldStandardTT-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Saira Extra Condensed';
+    src: url('@/assets/fonts/Saira_Extra_Condensed/SairaExtraCondensed-Regular.ttf') format('truetype');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'Chakra Petch';
+    src: url('@/assets/fonts/Chakra_Petch/ChakraPetch-Regular.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Dosis';
+    src: url('@/assets/fonts/Dosis/static/Dosis-Regular.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'M PLUS Rounded 1c';
+    src: url('@/assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Regular.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Valera Round';
+    src: url('@/assets/fonts/Valera_Round/ValeraRound-Regular.ttf') format('truetype');
+
+}

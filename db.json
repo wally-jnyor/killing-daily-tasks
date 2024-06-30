@@ -1,0 +1,98 @@
+{
+    "userData": [
+      {
+        "id": 1,
+        "name": "João Silva",
+        "age": 30,
+        "dataHora": "2023-12-15T08:00:00",
+        "prioridade": "alta",
+        "ativo": true,
+        "status": "pendente",
+        "work": [
+          {
+            "occupation": "Revisar estatísticas",
+            "wage": 2400
+          }
+        ],
+        "finance": {
+          "wage": 2400,
+          "safe": 400,
+          "free_money": 300,
+          "monthly_expenses": 500,
+          "investment_cash": [
+            {
+              "id": 2,
+              "name": "pc gamer",
+              "amount": 4000,
+              "total": 127
+            },
+            {
+              "id": 3,
+              "name": "casa",
+              "amount": 100000,
+              "total": 20000
+            }
+          ]
+        },
+        "checklist": [
+          {
+            "title": "Revisar estatísticas do enento X-nome",
+            "description": "ir em tal lugar, fazer tal coisa, etc etc, house mix eletro music",
+            "local": "rua tal, loja tal, numero tal",
+            "dataHora": "2023-12-15T08:00:00",
+            "status": 1,
+            "image": ""
+          },
+          {
+            "title": "Role não sei aonde",
+            "description": "ir em outro lugar, fazer outra coisa",
+            "local": "avenida tal, loja tal, numero tal",
+            "dataHora": "2023-12-16T09:00:00",
+            "status": 0,
+            "image": ""
+          },
+          {
+            "title": "Organizar a casa",
+            "description": "organizar tudo, limpar e arrumar",
+            "local": "rua nova, casa nova, numero novo",
+            "dataHora": "2023-12-17T10:00:00",
+            "status": 1,
+            "image": ""
+          },
+          {
+            "title": "passeio no park",
+            "description": "ir em outro lugar, fazer outra coisa",
+            "local": "avenida tal, loja tal, numero tal",
+            "dataHora": "2023-12-16T09:00:00",
+            "status": 0,
+            "image": ""
+          },
+          {
+            "title": "relatorios",
+            "description": "ir em outro lugar, fazer outra coisa",
+            "local": "avenida tal, loja tal, numero tal",
+            "dataHora": "2023-12-16T09:00:00",
+            "status": 0,
+            "image": ""
+          },
+          {
+            "title": "corrida de rally",
+            "description": "ir em outro lugar, fazer outra coisa",
+            "local": "avenida tal, loja tal, numero tal",
+            "dataHora": "2023-12-16T09:00:00",
+            "status": 0,
+            "image": ""
+          },
+          {
+            "title": "lavar o carro",
+            "description": "ir em outro lugar, fazer outra coisa",
+            "local": "avenida tal, loja tal, numero tal",
+            "dataHora": "2023-12-16T09:00:00",
+            "status": 0,
+            "image": ""
+          }
+        ]
+      }
+    ]
+  }
+  
