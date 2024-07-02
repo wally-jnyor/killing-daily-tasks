@@ -1,13 +1,23 @@
 <template>
   <div class="container pt-2">
 
-    <button id="show-modal" @click="showModal = true">Show Modal</button>
-
     <Teleport to="body">
       <!-- use the modal component, pass in the prop -->
       <Modal :show="showModal" @close="showModal = false">
         <template #header>
-          <h3>Custom Header</h3>
+          <div class="imgUpload">
+            <input type="file" name="imgUpload" id="imgUpload">
+          </div>
+        </template>
+        <template #body>
+          <div>
+            <input v-model="dataTask.description" name="description" id="description">
+          </div>
+        </template>
+        <template #footer>
+          <div>
+            <button type="submit">Update</button>
+          </div>
         </template>
       </Modal>
     </Teleport>
@@ -26,7 +36,7 @@
           <p> {{ task.description }} </p>
         </div>
         <div class="actions d-flex justify-content-center align-items-center">
-          <button class="btn btn-primary">Details</button>
+          <button class="btn btn-primary" id="show-modal" @click="updateTask(task)">Details</button>
         </div>
       </div>
     </div>
@@ -39,14 +49,21 @@ import Modal from '../views/vaiserOmodal.vue';
 import { ref, onMounted } from 'vue';
 
 // Variável reativa para armazenar os dados do usuário
-//const userData = ref([]);
+const userData = ref([]);
+
 
 // Variável reativa para controlar o modal
 const showModal = ref(false);
 
-// Função assíncrona para buscar os dados do usuário
-const userData = ref([]);
+// função para capiturar e editar dados do card selecionado
+const dataTask = defineModel();
+function updateTask(task) {
+  this.showModal = true;
+  dataTask.value = task;
+  console.log(dataTask)
+}
 
+// Função assíncrona para buscar os dados do usuário
 const getUserData = async () => {
   try {
     const response = await axios.get('http://localhost:3000/userData');
@@ -75,7 +92,7 @@ console.log(userData);
 <style scoped>
 .container {
   width: 100%;
-  height: 100vh;
+  height: auto;
   color: #ffff;
   border: solid 1px white;
 }

@@ -25,13 +25,12 @@
         </router-link>
       </li>
     </div>
-    <vaiserOmodal />
   </div>
 </template>
 
 <script setup>
 import axios from 'axios';
-import vaiserOmodal from '../views/vaiserOmodal.vue';
+//import vaiserOmodal from '../views/vaiserOmodal.vue';
 import { ref, onMounted } from 'vue';
 
 const userData = ref([]);

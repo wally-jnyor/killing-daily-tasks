@@ -2,28 +2,23 @@
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
       <div class="modal-container">
+        <div class="clseModalIcon d-flex w-100 justify-content-end">
+          <button class="modal-default-button btn btn-danger" @click="$emit('close')">X</button>
+        </div>
         <div class="modal-header">
-          <slot name="header">default header</slot>
+          <slot name="header"></slot>
         </div>
-
         <div class="modal-body">
-          <slot name="body">default body</slot>
+          <slot name="body"></slot>
         </div>
-
         <div class="modal-footer">
-          <slot name="footer">
-            default footer
-            <button
-              class="modal-default-button"
-              @click="$emit('close')"
-            >OK</button>
-          </slot>
+          <slot name="footer"></slot>
         </div>
       </div>
     </div>
   </Transition>
 
-<!--
+  <!--
   <div class="container">
     <div class="card">
       <div class="image">
@@ -66,11 +61,10 @@
 
 <script setup>
 //import axios from 'axios';
-
 const props = defineProps({
-  show: Boolean
+  show: Boolean,
 });
-console.log(props)
+console.log(props);
 
 //let file = null;
 //let fileUrl = null;
@@ -98,8 +92,6 @@ console.log(props)
 //    console.error('Erro ao enviar arquivo:', error);
 //  });
 //};
-
-
 </script>
 
 <style scoped>
@@ -110,19 +102,28 @@ console.log(props)
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   transition: opacity 0.3s ease;
+  background: #4776E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #8E54E9, #4776e6ad);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-.modal-container {
-  width: 300px;
+.modal-container[data-v-c1269d3d] {
+  width: 50%;
   margin: auto;
   padding: 20px 30px;
-  background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.17);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+ -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
 }
 
 .modal-header h3 {
