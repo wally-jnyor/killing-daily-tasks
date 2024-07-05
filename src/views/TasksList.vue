@@ -5,7 +5,7 @@
       >
       <div class="card justify-content-between d-flex m-2" v-for="task in user.checklist" :key="task.id">
         <div class="image">
-          <img :src="`/img/cardsUser/imagcard1.png`" alt="" srcset="">
+          <img :src="task.image || 'sem imagem'" alt="" srcset="">
         </div>
         <div class="title">
           <p class="my-2">{{ task.title }}</p>

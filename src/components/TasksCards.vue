@@ -1,22 +1,28 @@
 <template>
   <div class="container pt-2">
-
     <Teleport to="body">
-      <!-- use the modal component, pass in the prop -->
+      <!-- use the modal component, pass in the prop  v-if="fileUrl"-->
       <Modal :show="showModal" @close="showModal = false">
         <template #header>
-          <div class="imgUpload">
-            <input type="file" name="imgUpload" id="imgUpload">
+          <div v-if="fileUrl" class="imgUpload">
+            <img :src="fileUrl" alt="" class=" h-25 rounded-4" style="width:90%;">
+          </div>
+          <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
+            <input type="file" ref="fileInput" @change="handleFileChange" placeholder="image">
           </div>
         </template>
         <template #body>
-          <div>
-            <input v-model="dataTask.description" name="description" id="description">
+          <div class="flex-column w-100">
+            <label class="text-light">Title</label>
+            <textarea v-model="dataTask.title" class="form-control mb-3" name="title" type="" id="title"></textarea>
+            <label class="text-light">Description</label>
+            <input v-model="dataTask.description" class="form-control" name="description" id="description">
           </div>
         </template>
         <template #footer>
-          <div>
-            <button type="submit">Update</button>
+          <div class="btn-actions-footer w-100 d-flex justify-content-end">
+            <button @click="uploadFile" class="btn btn-warning m-1">Change</button>
+            <button type="submit" @click="updateTaskInServer" class="btn btn-success m-1">Update</button>
           </div>
         </template>
       </Modal>
@@ -25,9 +31,9 @@
     <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
       v-for="user in userData" :key="user.id"
     >
-      <div class="card justify-content-between d-flex m-2" v-for="(task, index) in limitedItems()" :key="index">
+      <div class="card justify-content-between d-flex m-2" v-for="task in limitedItems()" :key="task.id">
         <div class="image">
-          <img src="/img/cardsUser/imagcard1.png" alt="" srcset="">
+          <img :src="task.image || '/img/cardsUser/imagcard1.png'" alt="">
         </div>
         <div class="title">
           <p class="my-2"> {{ task.title }} </p>
@@ -48,19 +54,17 @@ import axios from 'axios';
 import Modal from '../views/vaiserOmodal.vue';
 import { ref, onMounted } from 'vue';
 
-// Variável reativa para armazenar os dados do usuário
 const userData = ref([]);
-
-
-// Variável reativa para controlar o modal
 const showModal = ref(false);
+const dataTask = ref({});
+const fileUrl = ref('');
 
-// função para capiturar e editar dados do card selecionado
-const dataTask = defineModel();
+// Função para capturar e editar dados do card selecionado
 function updateTask(task) {
-  this.showModal = true;
+  showModal.value = true;
   dataTask.value = task;
-  console.log(dataTask)
+  fileUrl.value = task.image; // Atualiza fileUrl com a imagem atual da tarefa
+  console.log(dataTask);
 }
 
 // Função assíncrona para buscar os dados do usuário
@@ -83,18 +87,56 @@ function limitedItems() {
   return [];
 }
 
+// Função para upload de imagens
+let file = null;
 
+const handleFileChange = (event) => {
+  file = event.target.files[0];
+};
+
+const uploadFile = () => {
+  let formData = new FormData();
+  formData.append('file', file);
+
+  axios.post('http://localhost:3000/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  .then(response => {
+    fileUrl.value = 'http://localhost:3000' + response.data.path;
+    dataTask.value.image = fileUrl.value; // Atualiza o campo 'image' em dataTask
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error('Erro ao enviar arquivo:', error);
+  });
+};
+
+// Função para atualizar item da checklist no servidor
+const updateTaskInServer = async () => {
+  try {
+    const userId = userData.value[0].id;
+    const checklistId = dataTask.value.id;
+    const response = await axios.put(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value);
+    console.log(response.data);
+    // Atualiza a checklist após a atualização
+    getUserData();
+  } catch (error) {
+    console.error('Erro ao atualizar item:', error);
+  }
+};
 
 // Exibindo no console apenas para verificação
 console.log(userData);
 </script>
+
 
 <style scoped>
 .container {
   width: 100%;
   height: auto;
   color: #ffff;
-  border: solid 1px white;
 }
 .card {
   width: 275px;
@@ -154,5 +196,11 @@ console.log(userData);
   font-family: "Dosis", serif;
   font-size: 1.1rem;
   line-height: 20px;
+}
+#modal-title textarea {
+  background-color: #14d69700;
+  border: none;
+  font-size: 1.7rem;
+  color: #fff;
 }
 </style>
