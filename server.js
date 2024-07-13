@@ -114,7 +114,7 @@ app.delete('/userData/:userId/checklist/:checklistId', (req, res) => {
     if (index !== -1) {
       user.checklist.splice(index, 1);
       saveDatabase();
-      res.status(200).json({ message: 'Item da checklist deletado' });
+      res.status(200).json({ message: 'Item deletado com sucesso!' });
     } else {
       res.status(404).json({ message: 'Item da checklist não encontrado' });
     }

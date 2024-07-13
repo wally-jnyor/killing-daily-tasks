@@ -15,7 +15,9 @@ main {
   width: 100%;
   height: 100%;
   display: flex;
-  /*background-image: url('../../public/img/imgd.jpg');*/
+  /*background-image: url('../../public/img/train.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 
 @media screen and (max-width: 1200px) {

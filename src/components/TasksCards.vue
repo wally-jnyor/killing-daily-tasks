@@ -1,7 +1,6 @@
 <template>
   <div class="container pt-2">
     <Teleport to="body">
-      <!-- use the modal component, pass in the prop  v-if="fileUrl"-->
       <Modal :show="showModal" @close="showModal = false">
         <template #header>
           <div v-if="fileUrl" class="imgUpload">
@@ -9,6 +8,7 @@
           </div>
           <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
             <input type="file" ref="fileInput" @change="handleFileChange" placeholder="image">
+            <button @click="uploadFile" class="btn btn-warning m-1">Change</button>
           </div>
         </template>
         <template #body>
@@ -21,7 +21,7 @@
         </template>
         <template #footer>
           <div class="btn-actions-footer w-100 d-flex justify-content-end">
-            <button @click="uploadFile" class="btn btn-warning m-1">Change</button>
+            <button type="submit" @click="deleteTask" class="btn btn-danger m-1">Delete</button>
             <button type="submit" @click="updateTaskInServer" class="btn btn-success m-1">Update</button>
           </div>
         </template>
@@ -53,6 +53,7 @@
 import axios from 'axios';
 import Modal from '../views/vaiserOmodal.vue';
 import { ref, onMounted } from 'vue';
+import Swal from 'sweetalert2'
 
 const userData = ref([]);
 const showModal = ref(false);
@@ -120,12 +121,51 @@ const updateTaskInServer = async () => {
     const checklistId = dataTask.value.id;
     const response = await axios.put(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value);
     console.log(response.data);
+    showModal.value = false;
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Card atualizado com sucesso!",
+      showConfirmButton: false,
+      timer: 1800
+    });
     // Atualiza a checklist após a atualização
     getUserData();
   } catch (error) {
     console.error('Erro ao atualizar item:', error);
   }
 };
+
+const deleteTask = async () => {
+  try {
+    const userId = userData.value[0].id;
+    const checklistId = dataTask.value.id;
+    const response = await axios.delete(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value);
+    console.log(response.data);
+    showModal.value = false;
+    Swal.fire({
+      title: "Deseja realmente deletar ?",
+      text: "Não será possível recupera-lo!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#14d697",
+      cancelButtonColor: "#dc3545",
+      confirmButtonText: "Sim, deletar!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+        title: "Deletado!",
+        text: response.data.message,
+        icon: "success"
+        });
+      }
+    });
+    // Atualiza a checklist após a atualização
+    getUserData();
+  } catch (error) {
+    console.error('Erro ao deletar item:', error);
+  }
+}
 
 // Exibindo no console apenas para verificação
 console.log(userData);
