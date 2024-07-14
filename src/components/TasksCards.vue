@@ -1,6 +1,31 @@
 <template>
   <div class="container pt-2">
-    <Teleport to="body">
+    <div class="create">
+      <button class="btn btn-success" @click="createTask" @close="showModal = false">Create</button>
+    </div>
+
+    <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
+      v-for="user in userData" :key="user.id"
+    >
+      <div class="card justify-content-between d-flex m-2" v-for="task in limitedItems()" :key="task.id">
+        <div class="image">
+          <img :src="task.image || '/img/cardsUser/imagcard1.png'" alt="">
+        </div>
+        <div class="title">
+          <p class="my-2"> {{ task.title }} </p>
+        </div>
+        <div class="description">
+          <p> {{ task.description }} </p>
+        </div>
+        <div class="actions d-flex justify-content-center align-items-center">
+          <button class="btn btn-primary" id="show-modal" @click="updateTask(task)">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAIS -->
+  <Teleport to="body">
       <Modal :show="showModal" @close="showModal = false">
         <template #header>
           <div v-if="fileUrl" class="imgUpload">
@@ -28,25 +53,32 @@
       </Modal>
     </Teleport>
 
-    <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
-      v-for="user in userData" :key="user.id"
-    >
-      <div class="card justify-content-between d-flex m-2" v-for="task in limitedItems()" :key="task.id">
-        <div class="image">
-          <img :src="task.image || '/img/cardsUser/imagcard1.png'" alt="">
-        </div>
-        <div class="title">
-          <p class="my-2"> {{ task.title }} </p>
-        </div>
-        <div class="description">
-          <p> {{ task.description }} </p>
-        </div>
-        <div class="actions d-flex justify-content-center align-items-center">
-          <button class="btn btn-primary" id="show-modal" @click="updateTask(task)">Details</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <Teleport to="body">
+      <Modal :show="showModal" @close="showModal = false">
+        <template #header>
+          <div v-if="fileUrl" class="imgUpload">
+            <img :src="fileUrl" alt="" class=" h-25 rounded-4" style="width:90%;">
+          </div>
+          <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
+            <input type="file" ref="fileInput" @change="handleFileChange" placeholder="image">
+            <button @click="uploadFile" class="btn btn-warning m-1">Change</button>
+          </div>
+        </template>
+        <template #body>
+          <div class="flex-column w-100">
+            <label class="text-light">Title</label>
+            <textarea v-model="dataTask.title" class="form-control mb-3" name="title" type="" id="title"></textarea>
+            <label class="text-light">Description</label>
+            <input v-model="dataTask.description" class="form-control" name="description" id="description">
+          </div>
+        </template>
+        <template #footer>
+          <div class="btn-actions-footer w-100 d-flex justify-content-end">
+            <button type="submit" @click="CreateTaskInServer" class="btn btn-success m-1">Create</button>
+          </div>
+        </template>
+      </Modal>
+    </Teleport>
 </template>
 
 <script setup>
@@ -113,7 +145,13 @@ const uploadFile = () => {
     console.error('Erro ao enviar arquivo:', error);
   });
 };
-
+// Função para criar novo tem na checklist
+function createTask() {
+  showModal.value = true;
+  //createTask.value = task;
+  //fileUrl.value = task.image;
+  console.log('create');
+}
 // Função para atualizar item da checklist no servidor
 const updateTaskInServer = async () => {
   try {
