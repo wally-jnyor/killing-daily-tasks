@@ -30,6 +30,6 @@
 
 @font-face {
     font-family: 'Valera Round';
-    src: url('@/assets/fonts/Valera_Round/ValeraRound-Regular.ttf') format('truetype');
-
+    src: url('./fonts/Varela_Round/VarelaRound-Regular.ttf') format('truetype');
+    font-weight: 300;
 }
