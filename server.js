@@ -1,3 +1,4 @@
+
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
@@ -66,42 +67,45 @@ app.get('/userData/:userId', (req, res) => {
   }
 });
 
-// Criar item na checklist
+// Criar item na checklist (sem upload de imagem)
 app.post('/userData/:userId/checklist', (req, res) => {
-  const userId = parseInt(req.params.userId);
-  const newChecklistItem = req.body;
-  const user = db.userData.find(user => user.id === userId);
-  if (user) {
-    newChecklistItem.id = user.checklist.length ? user.checklist[user.checklist.length - 1].id + 1 : 1;
-    user.checklist.push(newChecklistItem);
-    saveDatabase();
-    res.status(201).json(newChecklistItem);
-  } else {
-    res.status(404).json({ message: 'Usuário não encontrado' });
-  }
-});
-
-// Atualizar item na checklist
-app.put('/userData/:userId/checklist/:checklistId', (req, res) => {
     const userId = parseInt(req.params.userId);
-    const checklistId = parseInt(req.params.checklistId);
-    const updatedChecklistItem = req.body;
-  
+    const newChecklistItem = req.body;
     const user = db.userData.find(user => user.id === userId);
+  
     if (user) {
-      const itemIndex = user.checklist.findIndex(item => item.id === checklistId);
-      if (itemIndex !== -1) {
-        user.checklist[itemIndex] = { ...user.checklist[itemIndex], ...updatedChecklistItem };
-        saveDatabase();
-        res.status(200).json(user.checklist[itemIndex]);
-      } else {
-        res.status(404).json({ message: 'Item da checklist não encontrado' });
+      newChecklistItem.id = user.checklist.length ? user.checklist[user.checklist.length - 1].id + 1 : 1;
+      if (!newChecklistItem.image) {
+        newChecklistItem.image = 'http://localhost:3000/uploads/default.jpg'; // Definindo um caminho de imagem padrão
       }
+      user.checklist.push(newChecklistItem);
+      saveDatabase();
+      res.status(201).json(newChecklistItem);
     } else {
       res.status(404).json({ message: 'Usuário não encontrado' });
     }
   });
-  
+
+// Atualizar item na checklist
+app.put('/userData/:userId/checklist/:checklistId', (req, res) => {
+  const userId = parseInt(req.params.userId);
+  const checklistId = parseInt(req.params.checklistId);
+  const updatedChecklistItem = req.body;
+
+  const user = db.userData.find(user => user.id === userId);
+  if (user) {
+    const index = user.checklist.findIndex(item => item.id === checklistId);
+    if (index !== -1) {
+      user.checklist[index] = { ...user.checklist[index], ...updatedChecklistItem };
+      saveDatabase();
+      res.status(200).json(user.checklist[index]);
+    } else {
+      res.status(404).json({ message: 'Item da checklist não encontrado' });
+    }
+  } else {
+    res.status(404).json({ message: 'Usuário não encontrado' });
+  }
+});
 
 // Deletar item na checklist
 app.delete('/userData/:userId/checklist/:checklistId', (req, res) => {
@@ -114,7 +118,7 @@ app.delete('/userData/:userId/checklist/:checklistId', (req, res) => {
     if (index !== -1) {
       user.checklist.splice(index, 1);
       saveDatabase();
-      res.status(200).json({ message: 'Item deletado com sucesso!' });
+      res.status(200).json({ message: 'Item da checklist deletado' });
     } else {
       res.status(404).json({ message: 'Item da checklist não encontrado' });
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="container pt-2">
     <div class="create">
-      <button class="btn btn-success" @click="createTask" @close="showModal = false">Create</button>
+      <button class="btn btn-success" @click="showCreateModal">Create</button>
     </div>
 
     <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
@@ -29,11 +29,11 @@
       <Modal :show="showModal" @close="showModal = false">
         <template #header>
           <div v-if="fileUrl" class="imgUpload">
-            <img :src="fileUrl" alt="" class=" h-25 rounded-4" style="width:90%;">
+            <img :src="fileUrl" alt="" class="h-25 rounded-4" style="width:90%;">
           </div>
           <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
             <input type="file" ref="fileInput" @change="handleFileChange" placeholder="image">
-            <button @click="uploadFile" class="btn btn-warning m-1">Change</button>
+            <button @click="updateImagePath" class="btn btn-warning m-1">Change</button>
           </div>
         </template>
         <template #body>
@@ -53,8 +53,9 @@
       </Modal>
     </Teleport>
 
+    <!-- Create Task Modal -->
     <Teleport to="body">
-      <Modal :show="showModal" @close="showModal = false">
+      <Modal :show="showCreateModalState" @close="showCreateModalState = false">
         <template #header>
           <div v-if="fileUrl" class="imgUpload">
             <img :src="fileUrl" alt="" class=" h-25 rounded-4" style="width:90%;">
@@ -67,18 +68,25 @@
         <template #body>
           <div class="flex-column w-100">
             <label class="text-light">Title</label>
-            <textarea v-model="dataTask.title" class="form-control mb-3" name="title" type="" id="title"></textarea>
+            <textarea v-model="newTaskTitle" class="form-control mb-3" name="title" type="" id="title"></textarea>
             <label class="text-light">Description</label>
-            <input v-model="dataTask.description" class="form-control" name="description" id="description">
+            <input v-model="newTaskDescription" class="form-control" name="description" id="description">
+            <label class="text-light">Local</label>
+            <input v-model="newTaskLocal" class="form-control" name="local" id="local">
+            <label class="text-light">Data e Hora</label>
+            <input v-model="newTaskDataHora" class="form-control" type="datetime-local" name="dataHora" id="dataHora">
+            <label class="text-light">Status</label>
+            <input v-model="newTaskStatus" class="form-control" type="number" name="status" id="status">
           </div>
         </template>
         <template #footer>
           <div class="btn-actions-footer w-100 d-flex justify-content-end">
-            <button type="submit" @click="CreateTaskInServer" class="btn btn-success m-1">Create</button>
+            <button type="submit" @click="createNewTask" class="btn btn-success m-1">Create</button>
           </div>
         </template>
       </Modal>
     </Teleport>
+    
 </template>
 
 <script setup>
@@ -89,8 +97,15 @@ import Swal from 'sweetalert2'
 
 const userData = ref([]);
 const showModal = ref(false);
+const showCreateModalState = ref(false);
 const dataTask = ref({});
 const fileUrl = ref('');
+const fileInput = ref(null);
+const newTaskTitle = ref('');
+const newTaskDescription = ref('');
+const newTaskLocal = ref('');
+const newTaskDataHora = ref('');
+const newTaskStatus = ref(0);
 
 // Função para capturar e editar dados do card selecionado
 function updateTask(task) {
@@ -98,6 +113,11 @@ function updateTask(task) {
   dataTask.value = task;
   fileUrl.value = task.image; // Atualiza fileUrl com a imagem atual da tarefa
   console.log(dataTask);
+}
+
+// Função para exibir o modal de criação de nova tarefa
+function showCreateModal() {
+  showCreateModalState.value = true;
 }
 
 // Função assíncrona para buscar os dados do usuário
@@ -123,8 +143,25 @@ function limitedItems() {
 // Função para upload de imagens
 let file = null;
 
+//const handleFileChange = (event) => {
+//  file = event.target.files[0];
+//};
 const handleFileChange = (event) => {
-  file = event.target.files[0];
+  const file = event.target.files[0];
+  if (file) {
+    fileUrl.value = URL.createObjectURL(file);
+    console.log('File selected:', file);
+  }
+};
+
+const updateImagePath = () => {
+  if (fileInput.value.files.length > 0) {
+    const file = fileInput.value.files[0];
+    fileUrl.value = URL.createObjectURL(file);
+    console.log('Updated fileUrl:', fileUrl.value);
+  } else {
+    console.warn('No file selected');
+  }
 };
 
 const uploadFile = () => {
@@ -145,13 +182,38 @@ const uploadFile = () => {
     console.error('Erro ao enviar arquivo:', error);
   });
 };
-// Função para criar novo tem na checklist
-function createTask() {
-  showModal.value = true;
-  //createTask.value = task;
-  //fileUrl.value = task.image;
-  console.log('create');
-}
+
+// Função para criar novo item na checklist
+const createNewTask = async () => {
+    const imagePath = fileUrl.value;
+  console.log('Caminho da imagem:', imagePath); // Exibe o caminho da imagem no console
+  try {
+    const response = await axios.post(`http://localhost:3000/userData/1/checklist`, {
+      title: newTaskTitle.value,
+      description: newTaskDescription.value,
+      local: newTaskLocal.value,
+      dataHora: newTaskDataHora.value,
+      status: newTaskStatus.value,
+      image: fileUrl.value // Enviando o caminho da imagem diretamente
+    });
+
+    console.log('Nova tarefa criada:', response.data);
+    showCreateModalState.value = false;
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Nova tarefa criada com sucesso!",
+      showConfirmButton: false,
+      timer: 1800
+    });
+
+    // Atualiza a checklist após a criação
+    getUserData();
+  } catch (error) {
+    console.error('Erro ao criar nova tarefa:', error);
+  }
+};
+
 // Função para atualizar item da checklist no servidor
 const updateTaskInServer = async () => {
   try {
