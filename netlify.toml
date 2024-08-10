@@ -1,6 +1,6 @@
 [build]
+  command = "npm run build && json-server --watch db.json --port 3001 & npm start"
   publish = "dist"
-  command = "npm run build"
 
 [[redirects]]
   from = "/*"
