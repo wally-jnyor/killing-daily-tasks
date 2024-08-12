@@ -48,7 +48,7 @@
 
 <script>
 import fakeBackEnd from '../fakeBackend/UserData' //offline access
-import axios from 'axios'
+//import axios from 'axios'
 
 export default {
   components: {
@@ -61,27 +61,27 @@ export default {
   },
   computed: {
     limetidItems() {
-      if (this.userData) {
-        for (const item of this.userData) {
+      if (this.offlineUserData) {
+        for (const item of this.offlineUserData) {
           return item.checklist.slice(0,2);
         }
       }
       return [];
     }
   },
-  async created() {
-    await this.getUserData();
+  //async created() {
+    //await this.getUserData();
     //console.log(this.userData);
-  },
+  //},
   methods: {
-    async getUserData() {
-      try {
-        const response = await axios.get('http://localhost:3000/userData');
-        this.userData = response.data;
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-      }
-    },
+    //async getUserData() {
+      //try {
+        //const response = await axios.get('http://localhost:3000/userData');
+        //this.userData = response.data;
+      //} catch (error) {
+        //console.error('Erro ao buscar dados:', error);
+      //}
+    //},
   },
 }
 </script>
