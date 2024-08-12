@@ -117,7 +117,7 @@
 import userdataOffline from '../fakeBackend/UserData';
 import axios from 'axios';
 import Modal from '../views/vaiserOmodal.vue';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';  // import { ref, onMounted } from 'vue';
 import Swal from 'sweetalert2'
 
 const userdataOff = userdataOffline;
@@ -157,7 +157,7 @@ const getUserData = async () => {
   }
 };
 
-onMounted(getUserData);
+//onMounted(getUserData);
 
 // Função computada para limitar os itens da checklist
 function limitedItems() {
