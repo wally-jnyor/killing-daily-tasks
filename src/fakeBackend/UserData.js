@@ -43,7 +43,7 @@ const userData = [
                 "local": "rua tal, loja tal, numero tal",
                 "dataHora": "2023-12-15T08:00:00",
                 "status": 1,
-                "image": "../../uploads/luca-bravo-TaCk3NspYe0-unsplash.jpg"
+                "image": "/public/uploads/luca-bravo-TaCk3NspYe0-unsplash.jpg"
             },
             {
                 "id": 1,
@@ -138,7 +138,7 @@ const userData = [
                 "local": "",
                 "dataHora": "",
                 "status": 0,
-                "image": "../..//uploads/alex-shutin-XsC0GHXi-8k-unsplash.jpg",
+                "image": "../../uploads/alex-shutin-XsC0GHXi-8k-unsplash.jpg",
                 "id": 11
             },
             {
@@ -147,7 +147,7 @@ const userData = [
                 "local": "",
                 "dataHora": "",
                 "status": 0,
-                "image": "../..//uploads/jake-blucker-c6miNI_WdZ4-unsplash.jpg",
+                "image": "../../uploads/jake-blucker-c6miNI_WdZ4-unsplash.jpg",
                 "id": 12
             }
         ]
