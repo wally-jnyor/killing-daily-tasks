@@ -3,27 +3,51 @@
     <div class="create">
       <button class="btn btn-success" @click="showCreateModal">Create</button>
     </div>
-
-    <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
-      v-for="user in userData" :key="user.id"
-    >
-      <div class="card justify-content-between d-flex m-2" v-for="task in limitedItems()" :key="task.id">
-        <div class="image">
-          <img :src="task.image || '/img/cardsUser/imagcard1.png'" alt="">
+    <div v-if="userData">
+      <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
+        v-for="user in userData" :key="user.id"
+      >
+        <div class="card justify-content-between d-flex m-2" v-for="task in limitedItems()" :key="task.id">
+          <div class="image">
+            <img :src="task.image || '/img/cardsUser/imagcard1.png'" alt="">
+          </div>
+          <div class="title">
+            <p class="my-2"> {{ task.title }}</p>
+          </div>
+          <div class="description">
+            <p> {{ task.description }} </p>
+          </div>
+          <div class="actions d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary" id="show-modal" @click="updateTask(task)">Details</button>
+          </div>
         </div>
-        <div class="title">
-          <p class="my-2"> {{ task.title }} </p>
-        </div>
-        <div class="description">
-          <p> {{ task.description }} </p>
-        </div>
-        <div class="actions d-flex justify-content-center align-items-center">
-          <button class="btn btn-primary" id="show-modal" @click="updateTask(task)">Details</button>
+      </div>
+    </div>
+    
+    <div>
+      <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
+        v-for="user in userdataOff" :key="user.id"
+      >
+        <div class="card justify-content-between d-flex m-2" v-for="task in limitedItems()" :key="task.id">
+          <div class="image">
+            <img :src="task.image || '/img/cardsUser/imagcard1.png'" alt="">
+          </div>
+          <div class="title">
+            <p class="my-2"> {{ task.title }}</p>
+          </div>
+          <div class="description">
+            <p> {{ task.description }} </p>
+          </div>
+          <div class="actions d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary" id="show-modal" @click="updateTask(task)">Details</button>
+          </div>
+          <!--<p>{{ userdataOff }}</p> -->
         </div>
       </div>
     </div>
   </div>
-
+  <!--
+  <p>{{ userdataOff }}</p> -->
   <!-- MODAIS -->
   <Teleport to="body">
       <Modal :show="showModal" @close="showModal = false">
@@ -90,11 +114,14 @@
 </template>
 
 <script setup>
+import userdataOffline from '../fakeBackend/UserData';
 import axios from 'axios';
 import Modal from '../views/vaiserOmodal.vue';
 import { ref, onMounted } from 'vue';
 import Swal from 'sweetalert2'
 
+const userdataOff = userdataOffline;
+console.log(userdataOff)
 const userData = ref([]);
 const showModal = ref(false);
 const showCreateModalState = ref(false);
@@ -136,6 +163,8 @@ onMounted(getUserData);
 function limitedItems() {
   if (userData.value.length > 0) {
     return userData.value[0].checklist.slice(0, 6);
+  } else if (userdataOff.length > 0) {
+    return userdataOff[0].checklist.slice(0, 6);
   }
   return [];
 }

@@ -42,7 +42,7 @@
           "local": "rua tal, loja tal, numero tal",
           "dataHora": "2023-12-15T08:00:00",
           "status": 1,
-          "image": "http://localhost:3000/uploads/luca-bravo-TaCk3NspYe0-unsplash.jpg"
+          "image": "./uploads/luca-bravo-TaCk3NspYe0-unsplash.jpg"
         },
         {
           "id": 1,

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="container p-3">
-      <div v-for="user in userData" :key="user.id">
+      <div v-for="user in offlineUserData" :key="user.id">
         <div class="title">
         <h4>Hello, {{ user.name}}! </h4>
         <div v-for="finance in user.finance.investment_cash" :key="finance.id">
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import fakeBackEnd from '../fakeBackend/UserData' //offline acess
+import fakeBackEnd from '../fakeBackend/UserData' //offline access
 import axios from 'axios'
 
 export default {

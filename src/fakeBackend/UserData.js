@@ -22,13 +22,13 @@ const userData = [
             "monthly_expenses": 500,
             "investment_cash": [
                 {
-                    "id":2,
+                    "id": 2,
                     "name": "pc gamer",
                     "amount": 4000,
                     "total": 127
                 },
                 {
-                    "id":3,
+                    "id": 3,
                     "name": "casa",
                     "amount": 100000,
                     "total": 20000
@@ -37,25 +37,118 @@ const userData = [
         },
         "checklist": [
             {
-                "title": "Revisar estatísticas",
-                "description": "ir em tal lugar, fazer tal coisa",
-                "local" : "rua tal, loja tal, numero tal",
+                "id": 0,
+                "title": "test TestAmore tests",
+                "description": "desription testasdsad000",
+                "local": "rua tal, loja tal, numero tal",
                 "dataHora": "2023-12-15T08:00:00",
-                "status": 1
+                "status": 1,
+                "image": "../../uploads/luca-bravo-TaCk3NspYe0-unsplash.jpg"
             },
             {
-                "title": "Role não sei aonde",
-                "description": "ir em tal lugar, fazer tal coisa",
-                "local" : "rua tal, loja tal, numero tal",
-                "dataHora": "2023-12-15T08:00:00",
-                "status": 0
+                "id": 1,
+                "title": "Role não sei aondekoko",
+                "description": "asdgasd ollkdflkgo 89898 llç oui",
+                "local": "avenida tal, loja tal, numero tal",
+                "dataHora": "2023-12-16T09:00:00",
+                "status": 0,
+                "image": "../../uploads/devloper.jpeg"
             },
             {
-                "title": "Organizar a casa",
-                "description": "ir em tal lugar, fazer tal coisa",
-                "local" : "rua tal, loja tal, numero tal",
-                "dataHora": "2023-12-15T08:00:00",
-                "status": 1
+                "id": 2,
+                "title": "Compra de supermercado",
+                "description": "Comprar frutas, vegetais, carne e leite.",
+                "local": "Supermercado Local, Rua ABC, 123",
+                "dataHora": "2023-12-18T10:00:00",
+                "status": 0,
+                "image": "../../uploads/imgtest.jpeg"
+            },
+            {
+                "id": 3,
+                "title": "Reunião de Projeto",
+                "description": "Discutir o progresso do projeto com a equipe.",
+                "local": "Escritório, Avenida XYZ, 456",
+                "dataHora": "2023-12-19T14:00:00",
+                "status": 1,
+                "image": "../../uploads/david-rodrigo-Fr6zexbmjmc-unsplash.jpg"
+            },
+            {
+                "id": 4,
+                "title": "Treino de corrida",
+                "description": "Correr 5km no parque.",
+                "local": "Parque Central, Rua dos Atletas, 789",
+                "dataHora": "2023-12-20T06:30:00",
+                "status": 0,
+                "image": "../../uploads/train.jpg"
+            },
+            {
+                "id": 5,
+                "title": "Leitura do livro",
+                "description": "Ler 50 páginas do livro 'O Poder do Hábito'.",
+                "local": "Casa, Sala de Estar",
+                "dataHora": "2023-12-20T19:00:00",
+                "status": 0,
+                "image": "../../uploads/alex-shutin-XsC0GHXi-8k-unsplash.jpg"
+            },
+            {
+                "id": 6,
+                "title": "Curso de Programação",
+                "description": "Assistir a aula sobre Vue.js.",
+                "local": "Online, Plataforma XYZ",
+                "dataHora": "2023-12-21T20:00:00",
+                "status": 1,
+                "image": "../../uploads/david-rodrigo-Fr6zexbmjmc-unsplash.jpg"
+            },
+            {
+                "id": 7,
+                "title": "Visita ao médico",
+                "description": "Consulta de rotina com o Dr. João.",
+                "local": "Clínica Saúde, Avenida Médica, 321",
+                "dataHora": "2023-12-22T15:00:00",
+                "status": 0,
+                "image": "../../uploads/marc-olivier-jodoin-MJv31qXqSOU-unsplash.jpg"
+            },
+            {
+                "id": 8,
+                "title": "Limpeza da casa",
+                "description": "Limpar a sala e a cozinha.",
+                "local": "Casa, Rua Limpeza, 654",
+                "dataHora": "2023-12-23T08:00:00",
+                "status": 1,
+                "image": "../../uploads/frederic-paulussen-XHk0Se67H14-unsplash.jpg"
+            },
+            {
+                "id": 9,
+                "title": "Entrega de relatório",
+                "description": "Finalizar e enviar o relatório trimestral.",
+                "local": "Escritório, Avenida dos Relatórios, 987",
+                "dataHora": "2023-12-24T17:00:00",
+                "status": 0,
+                "image": "../../uploads/luca-bravo-TaCk3NspYe0-unsplash.jpg"
+            },
+            {
+                "id": 10,
+                "image": "../../uploads/imgtest.avif",
+                "title": "drfhgsdftgh",
+                "description": "sdfghsdfgh"
+            },
+            {
+                "title": "test up image",
+                "description": "test up files",
+                "local": "",
+                "dataHora": "",
+                "status": 0,
+                "image": "../..//uploads/alex-shutin-XsC0GHXi-8k-unsplash.jpg",
+                "id": 11
+            },
+            {
+                "title": "0000000",
+                "description": "3",
+                "local": "",
+                "dataHora": "",
+                "status": 0,
+                "image": "../..//uploads/jake-blucker-c6miNI_WdZ4-unsplash.jpg",
+                "id": 12
             }
         ]
     }
