@@ -19,7 +19,7 @@ npm install
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+npm run dev and npm start for json serve fakebackend
 ```
 
 ### Compile and Minify for Production
