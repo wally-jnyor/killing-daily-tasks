@@ -82,7 +82,7 @@ function updateTask(task) {
   showModal.value = true;
   dataTask.value = task;
   fileUrl.value = task.image; // Atualiza fileUrl com a imagem atual da tarefa
-  console.log(dataTask);
+  //console.log(dataTask);
 }
 
 // Função para upload de imagens
