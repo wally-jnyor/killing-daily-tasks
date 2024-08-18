@@ -134,7 +134,7 @@ import { ref, onMounted } from 'vue';
 
 
 //const userData = LocalUserData;
-const userData = ref (null)
+const userData = ref ([])
 const fileUrl = ref('');
 const dataTask = ref({});
 const fileInput = ref(null);
