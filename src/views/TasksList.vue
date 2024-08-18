@@ -7,8 +7,8 @@
             <img :src="fileUrl" alt="" class=" h-25 rounded-4" style="width:90%;">
           </div>
           <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
-            <input type="file" ref="fileInput" @change="handleFileChange" placeholder="image">
-            <button @click="uploadFile" class="btn btn-warning m-1">Change</button>
+            <input type="file" ref="fileInput" @change="handleFileChange.value" placeholder="image">
+            <button @click="updateImagePath.value" class="btn btn-warning m-1">Change</button>
           </div>
         </template>
         <template #body>
@@ -21,8 +21,8 @@
         </template>
         <template #footer>
           <div class="btn-actions-footer w-100 d-flex justify-content-end">
-            <button type="submit" @click="deleteTask" class="btn btn-danger m-1">Delete</button>
-            <button type="submit" @click="updateTaskInServer" class="btn btn-success m-1">Update</button>
+            <button type="submit" @click="onDeleteTask(dataTask)" class="btn btn-danger m-1">Delete</button>
+            <button type="submit" @click="onUpdateTask(dataTask.value)" class="btn btn-success m-1">Update</button>
           </div>
         </template>
       </Modal>
@@ -42,7 +42,7 @@
           <p>{{ task.description }}</p> <!-- Mostrar descrição da primeira task -->
         </div>
         <div class="actions d-flex justify-content-center align-items-center">
-          <button class="btn btn-primary" id="show-modal" @click="updateTask(task)">Details</button>
+          <button class="btn btn-primary" id="show-modal" @click="updateTaskModal(task)">Details</button>
         </div>
       </div>
     </div>
@@ -57,109 +57,66 @@
 </template>
 
 <script setup>
-import axios from 'axios';
+//import axios from 'axios';
+import {
+  updateTask,
+  //showCreateModal,
+  getUserData,
+  //limitedItems,
+  handleFileChange,
+  updateImagePath,
+  //createNewTask,
+  //updateTaskInServer,
+  deleteTask
+} from '../fakeBackend/ExportFunctions';
 import Modal from '../views/vaiserOmodal.vue';
-import { ref, onMounted } from 'vue';
 import Swal from 'sweetalert2'
+import { ref, onMounted } from 'vue';
 
-const userData = ref([]);
-const showModal = ref(false);
-const dataTask = ref({});
+
+//const userData = LocalUserData;
+const userData = ref ([])
 const fileUrl = ref('');
+const dataTask = ref({});
+const fileInput = ref(null);
+//const newTaskTitle = ref('');
+//const newTaskDescription = ref('');
+//const newTaskLocal = ref('');
+//const newTaskDataHora = ref('');
+//const newTaskStatus = ref(0);
+const showModal = ref(false);
+//const showCreateModalState = ref(false);
 
-const getUserData = async () => {
-  try {
-    const response = await axios.get('http://localhost:3000/userData');
-    userData.value = response.data;
-  } catch (error) {
-    console.error('Erro ao buscar dados:', error);
-  }
-};
-onMounted(getUserData);
+//function getUserData() {
+//  userData
+//}
 
-// Função para capturar e editar dados do card selecionado
-function updateTask(task) {
+onMounted(() => {
+  getUserData(userData);
+});
+
+function updateTaskModal(task) {
+  let updateData = task
+  //console.log(task)
   showModal.value = true;
-  dataTask.value = task;
-  fileUrl.value = task.image; // Atualiza fileUrl com a imagem atual da tarefa
-  //console.log(dataTask);
+  this.dataTask = updateData;
+  this.fileUrl = updateData.image; 
+}
+function onUpdateTask(dataTask, showModal) {
+  updateTask(dataTask, showModal)
 }
 
-// Função para upload de imagens
-let file = null;
+function onDeleteTask(dataTask) {
+  //console.log(dataTask)
+  deleteTask(dataTask, showModal, userData);
 
-const handleFileChange = (event) => {
-  file = event.target.files[0];
-};
-
-const uploadFile = () => {
-  let formData = new FormData();
-  formData.append('file', file);
-
-  axios.post('http://localhost:3000/upload', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-  .then(response => {
-    fileUrl.value = 'http://localhost:3000' + response.data.path;
-    dataTask.value.image = fileUrl.value; // Atualiza o campo 'image' em dataTask
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error('Erro ao enviar arquivo:', error);
-  });
-};
-
-// Função para atualizar item da checklist no servidor
-const updateTaskInServer = async () => {
-  try {
-    const userId = userData.value[0].id;
-    const checklistId = dataTask.value.id;
-    const response = await axios.put(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value);
-    console.log(response.data);
-    showModal.value = false;
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Card atualizado com sucesso!",
-      showConfirmButton: false,
-      timer: 1800
-    });
-    // Atualiza a checklist após a atualização
-    getUserData();
-  } catch (error) {
-    console.error('Erro ao atualizar item:', error);
-  }
-};
-
-const deleteTask = () => {
-  //const userId = userData.value[0].id;
-    //1const checklistId = dataTask.value.id;
-    //const response = await axios.delete(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value);
-  showModal.value = false;
   Swal.fire({
-    title: "Deseja realmente deletar ?",
-    text: "Não será possível recupera-lo!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#14d697",
-    cancelButtonColor: "#dc3545",
-    confirmButtonText: "Sim, deletar!"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const userId = userData.value[0].id;
-      const checklistId = dataTask.value.id;
-      const response = axios.delete(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value);
-      Swal.fire({
-        title: "Deletado!",
-        text: response.data.message,
-        icon: "success"
-      });
-    }
+    title: "Deletado!",
+    text: "O item foi deletado com sucesso.",
+    icon: "success"
   });
-    // Atualiza a checklist após a atualização
-    getUserData();
+
+  getUserData(userData)
 }
 
 

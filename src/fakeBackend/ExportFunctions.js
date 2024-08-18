@@ -41,10 +41,13 @@ export function updateTask(dataTask, showModal) {
   try {
     const localData = loadFromLocalStorage();
     const checklist = localData[0].checklist;
-    const index = checklist.findIndex(task => task.id === dataTask.value.id);
+    console.log(dataTask.id)
+    const index = checklist.findIndex(task => task.id === dataTask.id);
+    //console.log(localData)
+    //console.log(index)
     
     if (index !== -1) {
-      checklist[index] = { ...dataTask.value }; // Atualiza a tarefa localmente
+      checklist[index] = { ...dataTask }; // Atualiza a tarefa localmente
       saveToLocalStorage(localData); // Salva as alterações no localStorage
     }
 
@@ -58,39 +61,54 @@ export function updateTask(dataTask, showModal) {
 }
 
 // Função para exibir o modal de criação de nova tarefa
-export function showCreateModal(showCreateModalState) {
-  showCreateModalState.value = true;
-}
+//export function showCreateModal(showCreateModalState) {
+//  showCreateModalState.value = true;
+//}
 
-// Função para upload de imagens
+// Função para lidar com a seleção de arquivos e armazenar a URL no localStorage
 export function handleFileChange(event, fileUrl) {
-  const file = event.target.files[0];
-  if (file) {
-    fileUrl.value = URL.createObjectURL(file);
-    console.log('File selected:', file);
+    const file = event.target.files[0];
+    if (file) {
+      fileUrl.value = URL.createObjectURL(file);
+      console.log('File selected:', fileUrl.value);
+    } else {
+      console.warn('No file selected');
+    }
   }
-}
-
-export function updateImagePath(fileInput, fileUrl) {
-  if (fileInput.value.files.length > 0) {
-    const file = fileInput.value.files[0];
-    fileUrl.value = URL.createObjectURL(file);
-    console.log('Updated fileUrl:', fileUrl.value);
-  } else {
-    console.warn('No file selected');
+  
+  // Função para atualizar o caminho da imagem
+  export function updateImagePath(fileInput, fileUrl) {
+    if (fileInput && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      fileUrl.value = URL.createObjectURL(file);
+      console.log('Updated fileUrl:', fileUrl.value);
+    } else {
+      console.warn('No file selected or fileInput is invalid');
+    }
   }
-}
-
 // Função para criar novo item na checklist sem Axios, salvando no localStorage
 export function createNewTask(newTask, userData) {
-  const localData = loadFromLocalStorage();
-  newTask.id = Date.now(); // Gerando um ID único baseado na data atual
-  localData[0].checklist.push(newTask); // Adiciona a nova tarefa no array local
-
-  console.log('Nova tarefa criada:', newTask);
-  saveToLocalStorage(localData); // Salva as alterações no localStorage
-  userData.value = localData; // Atualiza os dados do usuário
-}
+    const localData = loadFromLocalStorage();
+  
+    // Verifica se há tarefas na checklist e encontra o maior ID
+    const checklist = localData[0].checklist;
+    const maxId = checklist.length > 0 ? Math.max(...checklist.map(task => Number(task.id))) : 0;
+  
+    // Atribui o novo ID como o maior ID + 1
+    newTask.id = maxId + 1;
+  
+    // Adiciona a nova tarefa no array local
+    checklist.push(newTask);
+  
+    console.log('Nova tarefa criada:', newTask);
+  
+    // Salva as alterações no localStorage
+    saveToLocalStorage(localData);
+  
+    // Atualiza os dados do usuário
+    userData.value = localData;
+  }
+  
 
 // Função para deletar item da checklist localmente e salvar no localStorage
 export function deleteTask(dataTask, showModal, userData) {

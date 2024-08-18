@@ -56,8 +56,8 @@
             <img :src="fileUrl" alt="" class="h-25 rounded-4" style="width:90%;">
           </div>
           <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
-            <input type="file" ref="fileInput" @change="handleFileChange" placeholder="image">
-            <button @click="updateImagePath" class="btn btn-warning m-1">Change</button>
+            <input type="file" ref="fileInput" @change="onHandleFileChange" placeholder="image">
+            <button @click="onUpdateImagePath" class="btn btn-warning m-1">Change</button>
           </div>
         </template>
         <template #body>
@@ -85,8 +85,8 @@
             <img :src="fileUrl" alt="" class=" h-25 rounded-4" style="width:90%;">
           </div>
           <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
-            <input type="file" ref="fileInput" @change="handleFileChange" placeholder="image">
-            <button @click="uploadFile" class="btn btn-warning m-1">Change</button>
+            <input type="file" ref="fileInput" @change="onHandleFileChange" placeholder="image">
+            <button @click="onUpdateImagePath" class="btn btn-warning m-1">Change</button>
           </div>
         </template>
         <template #body>
@@ -161,6 +161,9 @@ function limitedItems() {
   return [];
 }
 
+function showCreateModal() {
+  showCreateModalState.value = true
+}
 function onCreateNewTask() {
   const newTask = {
     title: newTaskTitle.value,
@@ -171,7 +174,7 @@ function onCreateNewTask() {
     image: fileUrl.value
   };
 
-  createNewTask(newTask, this.userData);
+  createNewTask(newTask, userData);
 
   Swal.fire({
     position: "center",
@@ -189,7 +192,20 @@ function updateTaskModal(task) {
   this.dataTask = updateData;
   this.fileUrl = updateData.image; 
 }
-function onUpdateTask(dataTask, showModal) {
+
+// Função chamada quando o arquivo é selecionado
+const onHandleFileChange = (event) => {
+  handleFileChange(event, fileUrl);
+};
+
+// Função chamada quando o botão é clicado para atualizar o caminho da imagem
+const onUpdateImagePath = () => {
+  if (fileInput.value) {
+    updateImagePath(fileInput.value, fileUrl);
+  }
+};
+function onUpdateTask(dataTask) {
+  //console.log(dataTask)
   updateTask(dataTask, showModal)
 }
 
