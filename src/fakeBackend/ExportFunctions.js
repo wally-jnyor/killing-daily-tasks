@@ -115,6 +115,7 @@ export function deleteTask(dataTask, showModal, userData) {
   try {
     const localData = loadFromLocalStorage();
     const checklist = localData[0].checklist;
+    console.log(dataTask)
     const index = checklist.findIndex(task => task.id === dataTask.id);
 
     if (index !== -1) {

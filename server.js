@@ -76,7 +76,7 @@ app.post('/userData/:userId/checklist', (req, res) => {
     if (user) {
       newChecklistItem.id = user.checklist.length ? user.checklist[user.checklist.length - 1].id + 1 : 1;
       if (!newChecklistItem.image) {
-        newChecklistItem.image = 'http://localhost:3000/uploads/default.jpg'; // Definindo um caminho de imagem padrão
+        newChecklistItem.image = ''; // Definindo um caminho de imagem padrão
       }
       user.checklist.push(newChecklistItem);
       saveDatabase();

@@ -37,117 +37,282 @@
       "checklist": [
         {
           "id": 0,
-          "title": "test TestAmore tests",
-          "description": "desription testasdsad000",
+          "title": "test  tests",
+          "description": "desription ",
           "local": "rua tal, loja tal, numero tal",
           "dataHora": "2023-12-15T08:00:00",
           "status": 1,
-          "image": "./uploads/luca-bravo-TaCk3NspYe0-unsplash.jpg"
+          "image": "http://localhost:3000/uploads/1350572.jpeg"
         },
         {
-          "id": 1,
-          "title": "Role não sei aondekoko",
-          "description": "asdgasd ollkdflkgo 89898 llç oui",
-          "local": "avenida tal, loja tal, numero tal",
-          "dataHora": "2023-12-16T09:00:00",
-          "status": 0,
-          "image": "http://localhost:3000/uploads/devloper.jpeg"
-        },
-        {
-          "id": 2,
-          "title": "Compra de supermercado",
-          "description": "Comprar frutas, vegetais, carne e leite.",
-          "local": "Supermercado Local, Rua ABC, 123",
-          "dataHora": "2023-12-18T10:00:00",
-          "status": 0,
-          "image": "http://localhost:3000/uploads/imgtest.jpeg"
-        },
-        {
-          "id": 3,
-          "title": "Reunião de Projeto",
-          "description": "Discutir o progresso do projeto com a equipe.",
-          "local": "Escritório, Avenida XYZ, 456",
-          "dataHora": "2023-12-19T14:00:00",
-          "status": 1,
-          "image": "http://localhost:3000/uploads/david-rodrigo-Fr6zexbmjmc-unsplash.jpg"
-        },
-        {
-          "id": 4,
-          "title": "Treino de corrida",
-          "description": "Correr 5km no parque.",
-          "local": "Parque Central, Rua dos Atletas, 789",
-          "dataHora": "2023-12-20T06:30:00",
-          "status": 0,
-          "image": "http://localhost:3000/uploads/train.jpg"
-        },
-        {
-          "id": 5,
-          "title": "Leitura do livro",
-          "description": "Ler 50 páginas do livro 'O Poder do Hábito'.",
-          "local": "Casa, Sala de Estar",
-          "dataHora": "2023-12-20T19:00:00",
-          "status": 0,
-          "image": "http://localhost:3000/uploads/alex-shutin-XsC0GHXi-8k-unsplash.jpg"
-        },
-        {
-          "id": 6,
-          "title": "Curso de Programação",
-          "description": "Assistir a aula sobre Vue.js.",
-          "local": "Online, Plataforma XYZ",
-          "dataHora": "2023-12-21T20:00:00",
-          "status": 1,
-          "image": "http://localhost:3000/uploads/david-rodrigo-Fr6zexbmjmc-unsplash.jpg"
-        },
-        {
-          "id": 7,
-          "title": "Visita ao médico",
-          "description": "Consulta de rotina com o Dr. João.",
-          "local": "Clínica Saúde, Avenida Médica, 321",
-          "dataHora": "2023-12-22T15:00:00",
-          "status": 0,
-          "image": "http://localhost:3000/uploads/marc-olivier-jodoin-MJv31qXqSOU-unsplash.jpg"
-        },
-        {
-          "id": 8,
-          "title": "Limpeza da casa",
-          "description": "Limpar a sala e a cozinha.",
-          "local": "Casa, Rua Limpeza, 654",
-          "dataHora": "2023-12-23T08:00:00",
-          "status": 1,
-          "image": "http://localhost:3000/uploads/frederic-paulussen-XHk0Se67H14-unsplash.jpg"
-        },
-        {
-          "id": 9,
-          "title": "Entrega de relatório",
-          "description": "Finalizar e enviar o relatório trimestral.",
-          "local": "Escritório, Avenida dos Relatórios, 987",
-          "dataHora": "2023-12-24T17:00:00",
-          "status": 0,
-          "image": "http://localhost:3000/uploads/luca-bravo-TaCk3NspYe0-unsplash.jpg"
-        },
-        {
-          "id": 10,
-          "image": "http://localhost:3000/uploads/imgtest.avif",
-          "title": "drfhgsdftgh",
-          "description": "sdfghsdfgh"
-        },
-        {
-          "title": "test up image",
-          "description": "test up files",
+          "title": "zsdgfvasdf",
+          "description": "asdfasdfasdf",
           "local": "",
           "dataHora": "",
           "status": 0,
-          "image": "http://localhost:3000/uploads/alex-shutin-XsC0GHXi-8k-unsplash.jpg",
+          "image": "http://localhost:3000/uploads/988069.png",
+          "id": 1
+        },
+        {
+          "title": "swefwery",
+          "description": "tryueryi",
+          "local": "",
+          "dataHora": "",
+          "status": 0,
+          "image": "",
+          "id": 2
+        },
+        {
+          "title": "uoouuu",
+          "description": "uuuuuuu",
+          "local": "uu",
+          "dataHora": "",
+          "status": 0,
+          "image": "",
+          "id": 3
+        },
+        {
+          "title": "Revisão de código",
+          "description": "Revisão das novas funcionalidades implementadas.",
+          "local": "Remoto",
+          "dataHora": "2024-11-18T11:00:00",
+          "status": 0,
+          "image": "",
+          "id": 4
+        },
+        {
+          "title": "Compra de materiais",
+          "description": "Comprar suprimentos para o escritório.",
+          "local": "Loja de Material de Escritório",
+          "dataHora": "2024-11-19T15:30:00",
+          "status": 0,
+          "image": "",
+          "id": 5
+        },
+        {
+          "title": "Ajuste de layout",
+          "description": "Refinamento de layout da nova página do site.",
+          "local": "Remoto",
+          "dataHora": "2024-11-20T16:00:00",
+          "status": 1,
+          "image": "http://localhost:3000/uploads/max-kouprov-HBibYOGsUi0-unsplash.jpg",
+          "id": 6
+        },
+        {
+          "title": "Relatório financeiro",
+          "description": "Preparar relatório de despesas do mês.",
+          "local": "Financeiro",
+          "dataHora": "2024-11-21T09:00:00",
+          "status": 0,
+          "image": "",
+          "id": 7
+        },
+        {
+          "title": "Backup de dados",
+          "description": "Realizar backup completo dos dados do sistema.",
+          "local": "Servidores Internos",
+          "dataHora": "2024-11-22T01:00:00",
+          "status": 1,
+          "image": "http://localhost:3000/uploads/825213.png",
+          "id": 8
+        },
+        {
+          "title": "Revisão de contrato",
+          "description": "Analisar contrato com fornecedor.",
+          "local": "Escritório",
+          "dataHora": "2024-11-23T10:30:00",
+          "status": 0,
+          "image": "",
+          "id": 9
+        },
+        {
+          "title": "Atualização de software",
+          "description": "Atualizar software de gerenciamento.",
+          "local": "Departamento de TI",
+          "dataHora": "2024-11-24T20:00:00",
+          "status": 1,
+          "image": "",
+          "id": 10
+        },
+        {
+          "title": "Reunião de equipe",
+          "description": "Reunião semanal com todos os departamentos.",
+          "local": "Auditório",
+          "dataHora": "2024-11-25T08:00:00",
+          "status": 1,
+          "image": "",
           "id": 11
         },
         {
-          "title": "0000000",
-          "description": "3",
-          "local": "",
-          "dataHora": "",
+          "title": "Entrega de documentação",
+          "description": "Finalizar e entregar documentação técnica.",
+          "local": "Remoto",
+          "dataHora": "2024-11-26T17:00:00",
           "status": 0,
-          "image": "http://localhost:3000/uploads/jake-blucker-c6miNI_WdZ4-unsplash.jpg",
+          "image": "",
           "id": 12
+        },
+        {
+          "title": "Teste de funcionalidades",
+          "description": "Testes de integração no sistema.",
+          "local": "Laboratório de Testes",
+          "dataHora": "2024-11-27T13:00:00",
+          "status": 1,
+          "image": "",
+          "id": 13
+        },
+        {
+          "title": "Contratação de serviço",
+          "description": "Negociação de serviço de limpeza.",
+          "local": "Sala de Reuniões",
+          "dataHora": "2024-11-28T11:00:00",
+          "status": 0,
+          "image": "",
+          "id": 14
+        },
+        {
+          "title": "Organizar documentos",
+          "description": "Organizar arquivos físicos.",
+          "local": "Arquivo",
+          "dataHora": "2024-11-29T10:30:00",
+          "status": 1,
+          "image": "",
+          "id": 15
+        },
+        {
+          "title": "Manutenção do servidor",
+          "description": "Agendar manutenção preventiva.",
+          "local": "Servidor Central",
+          "dataHora": "2024-11-30T02:00:00",
+          "status": 0,
+          "image": "",
+          "id": 16
+        },
+        {
+          "title": "Apresentação de projeto",
+          "description": "Mostrar progresso do projeto atual.",
+          "local": "Sala de Reuniões",
+          "dataHora": "2024-12-01T14:30:00",
+          "status": 1,
+          "image": "",
+          "id": 17
+        },
+        {
+          "title": "Análise de orçamento",
+          "description": "Verificar orçamento para novas aquisições.",
+          "local": "Financeiro",
+          "dataHora": "2024-12-02T09:00:00",
+          "status": 0,
+          "image": "",
+          "id": 18
+        },
+        {
+          "title": "Planejamento de férias",
+          "description": "Distribuir cronograma de férias.",
+          "local": "Recursos Humanos",
+          "dataHora": "2024-12-03T10:00:00",
+          "status": 1,
+          "image": "",
+          "id": 19
+        },
+        {
+          "title": "Inventário de equipamentos",
+          "description": "Verificação e atualização do inventário.",
+          "local": "Depósito",
+          "dataHora": "2024-12-04T08:00:00",
+          "status": 1,
+          "image": "",
+          "id": 20
+        },
+        {
+          "title": "Revisão de políticas",
+          "description": "Atualizar políticas de segurança da empresa.",
+          "local": "Diretoria",
+          "dataHora": "2024-12-05T16:00:00",
+          "status": 0,
+          "image": "",
+          "id": 21
+        },
+        {
+          "title": "Ajustes no sistema",
+          "description": "Implementar melhorias no sistema.",
+          "local": "TI",
+          "dataHora": "2024-12-06T12:00:00",
+          "status": 1,
+          "image": "",
+          "id": 22
+        },
+        {
+          "title": "Integração com API",
+          "description": "Configurar integração com sistema externo.",
+          "local": "Remoto",
+          "dataHora": "2024-12-07T15:00:00",
+          "status": 1,
+          "image": "",
+          "id": 23
+        },
+        {
+          "title": "Reunião de feedback",
+          "description": "Sessão de feedback com a equipe.",
+          "local": "Sala de Reuniões",
+          "dataHora": "2024-12-08T11:30:00",
+          "status": 0,
+          "image": "",
+          "id": 24
+        },
+        {
+          "title": "Organização do espaço",
+          "description": "Reorganizar o layout do escritório.",
+          "local": "Escritório",
+          "dataHora": "2024-12-09T10:30:00",
+          "status": 1,
+          "image": "",
+          "id": 25
+        },
+        {
+          "title": "Controle de qualidade",
+          "description": "Avaliar produtos do estoque.",
+          "local": "Qualidade",
+          "dataHora": "2024-12-10T08:00:00",
+          "status": 1,
+          "image": "",
+          "id": 26
+        },
+        {
+          "title": "Sessão de brainstorming",
+          "description": "Criar ideias para novo projeto.",
+          "local": "Auditório",
+          "dataHora": "2024-12-11T14:00:00",
+          "status": 0,
+          "image": "",
+          "id": 27
+        },
+        {
+          "title": "Capacitação de liderança",
+          "description": "Treinamento para líderes.",
+          "local": "Recursos Humanos",
+          "dataHora": "2024-12-12T09:00:00",
+          "status": 1,
+          "image": "",
+          "id": 28
+        },
+        {
+          "title": "Análise de desempenho",
+          "description": "Avaliação de desempenho dos funcionários.",
+          "local": "Diretoria",
+          "dataHora": "2024-12-13T15:00:00",
+          "status": 0,
+          "image": "",
+          "id": 29
+        },
+        {
+          "title": "Relatório de vendas",
+          "description": "Preparar relatório de vendas trimestral.",
+          "local": "Financeiro",
+          "dataHora": "2024-12-14T17:00:00",
+          "status": 1,
+          "image": "",
+          "id": 30
         }
       ]
     }

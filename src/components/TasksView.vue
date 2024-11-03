@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container m-0" style="max-width:100%;">
     <TasksCards />
   </div>
 </template>

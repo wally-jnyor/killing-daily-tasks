@@ -1,16 +1,18 @@
 <template>
-  <div class="container pt-2">
-    <div class="create">
-      <button class="btn btn-success" @click="showCreateModal()">Create</button>
+  <div class="container pt-2 mx-1" style="max-width:100%;">
+    <div class="create d-flex justify-content-end">
+      <button class="btn btn-success mr-3" @click="showCreateModalState = true" style="margin-right: 10px; border-radius: 15px;">Create new task</button>
+      <RouterLink to="/all-tasks" class="p-0">
+        <button class="btn btn-primary" style="border-radius: 15px;">Show All</button>
+      </RouterLink>
     </div>
-    <!--
     <div>
-      <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
+      <div class="cards d-flex justify-content-evenly align-content-start align-items-baseline flex-wrap" 
         v-for="user in userData" :key="user.id"
       >
         <div class="card justify-content-between d-flex m-2" v-for="task in limitedItems()" :key="task.id">
-          <div class="image">
-            <img :src="task.image || '/img/cardsUser/imagcard1.png'" alt="">
+          <div class="image" v-if="task.image">
+            <img :src="task.image" alt="">
           </div>
           <div class="title">
             <p class="my-2"> {{ task.title }}</p>
@@ -24,30 +26,7 @@
         </div>
       </div>
     </div>
-    -->
-    <div>
-      <div class="cards d-flex justify-content-start align-content-start align-items-baseline flex-wrap" 
-        v-for="user in userData" :key="user.id"
-      >
-        <div class="card justify-content-between d-flex m-2" v-for="task in limitedItems()" :key="task.id">
-          <div class="image">
-            <img :src="task.image || '/img/cardsUser/imagcard1.png'" alt="">
-          </div>
-          <div class="title">
-            <p class="my-2"> {{ task.title }}</p>
-          </div>
-          <div class="description">
-            <p> {{ task.description }} </p>
-          </div>
-          <div class="actions d-flex justify-content-center align-items-center">
-            <button class="btn btn-primary" id="show-modal" @click="updateTaskModal(task)">Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-  <!--
-  <p>{{ userdataOff }}</p> -->
   <!-- MODAIS -->
   <Teleport to="body">
       <Modal :show="showModal" @close="showModal = false">
@@ -56,8 +35,8 @@
             <img :src="fileUrl" alt="" class="h-25 rounded-4" style="width:90%;">
           </div>
           <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
-            <input type="file" ref="fileInput" @change="onHandleFileChange" placeholder="image">
-            <button @click="onUpdateImagePath" class="btn btn-warning m-1">Change</button>
+            <input type="file" ref="fileInput" @change="handleFileChange" placeholder="image">
+            <button @click="uploadFile()" class="btn btn-warning m-1">Change</button>
           </div>
         </template>
         <template #body>
@@ -70,8 +49,8 @@
         </template>
         <template #footer>
           <div class="btn-actions-footer w-100 d-flex justify-content-end">
-            <button type="submit" @click="onDeleteTask(dataTask)" class="btn btn-danger m-1">Delete</button>
-            <button type="submit" @click="onUpdateTask(dataTask)" class="btn btn-success m-1">Update</button>
+            <button type="submit" @click="deleteTask(dataTask)" class="btn btn-danger m-1">Delete</button>
+            <button type="submit" @click="updateTaskInServer()" class="btn btn-success m-1">Update</button>
           </div>
         </template>
       </Modal>
@@ -80,15 +59,6 @@
     <!-- Create Task Modal -->
     <Teleport to="body">
       <Modal :show="showCreateModalState" @close="showCreateModalState = false">
-        <template #header>
-          <div v-if="fileUrl" class="imgUpload">
-            <img :src="fileUrl" alt="" class=" h-25 rounded-4" style="width:90%;">
-          </div>
-          <div class="inputImageFile w-100 mt-3 d-flex justify-content-between flex-column text-light">
-            <input type="file" ref="fileInput" @change="onHandleFileChange" placeholder="image">
-            <button @click="onUpdateImagePath" class="btn btn-warning m-1">Change</button>
-          </div>
-        </template>
         <template #body>
           <div class="flex-column w-100">
             <label class="text-light">Title</label>
@@ -105,7 +75,7 @@
         </template>
         <template #footer>
           <div class="btn-actions-footer w-100 d-flex justify-content-end">
-            <button type="submit" @click="onCreateNewTask()" class="btn btn-success m-1">Create</button>
+            <button type="submit" @click="createTask()" class="btn btn-success m-1">Create</button>
           </div>
         </template>
       </Modal>
@@ -114,41 +84,23 @@
 </template>
 
 <script setup>
-//import localUserDataOffline from '../fakeBackend/UserData';
-//import LocalUserData from '../fakeBackend/UserData';
-// Importando as funções do taskService.js
-import {
-  updateTask,
-  //showCreateModal,
-  getUserData,
-  //limitedItems,
-  handleFileChange,
-  updateImagePath,
-  createNewTask,
-  //updateTaskInServer,
-  deleteTask
-} from '../fakeBackend/ExportFunctions';
 import Modal from '../views/vaiserOmodal.vue';
 import Swal from 'sweetalert2'
+import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
-
-//const userData = LocalUserData;
-const userData = ref ([])
-const fileUrl = ref('');
-const dataTask = ref({});
 const fileInput = ref(null);
 const newTaskTitle = ref('');
 const newTaskDescription = ref('');
 const newTaskLocal = ref('');
 const newTaskDataHora = ref('');
 const newTaskStatus = ref(0);
+const userData = ref([]);
+const dataTask = ref({});
+const fileUrl = ref('');
 const showModal = ref(false);
 const showCreateModalState = ref(false);
-
-//function getUserData() {
-//  userData
-//}
+const res = ref([]);
 
 onMounted(() => {
   getUserData(userData);
@@ -156,71 +108,155 @@ onMounted(() => {
 
 function limitedItems() {
   if (this.userData.length > 0) {
-    return this.userData[0].checklist.slice(0, 6);
+    return this.userData[0].checklist.slice(0, 8);
   }
   return [];
 }
 
-function showCreateModal() {
-  showCreateModalState.value = true
-}
-function onCreateNewTask() {
-  const newTask = {
-    title: newTaskTitle.value,
-    description: newTaskDescription.value,
-    local: newTaskLocal.value,
-    dataHora: newTaskDataHora.value,
-    status: newTaskStatus.value,
-    image: fileUrl.value
-  };
-
-  createNewTask(newTask, userData);
-
-  Swal.fire({
-    position: "center",
-    icon: "success",
-    title: "Nova tarefa criada com sucesso!",
-    showConfirmButton: false,
-    timer: 1800
-  });
+// Função para abrir modal, capturar e editar dados do card selecionado
+function updateTask(task) {
+  showModal.value = true;
+  dataTask.value = task;
+  fileUrl.value = task.image; // Atualiza fileUrl com a imagem atual da tarefa
 }
 
-function updateTaskModal(task) {
-  let updateData = task
-  //console.log(task)
-  this.showModal = true;
-  this.dataTask = updateData;
-  this.fileUrl = updateData.image; 
-}
-
-// Função chamada quando o arquivo é selecionado
-const onHandleFileChange = (event) => {
-  handleFileChange(event, fileUrl);
-};
-
-// Função chamada quando o botão é clicado para atualizar o caminho da imagem
-const onUpdateImagePath = () => {
-  if (fileInput.value) {
-    updateImagePath(fileInput.value, fileUrl);
+const getUserData = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/userData');
+    userData.value = response.data;
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error);
   }
 };
-function onUpdateTask(dataTask) {
-  //console.log(dataTask)
-  updateTask(dataTask, showModal)
-}
 
-function onDeleteTask(dataTask) {
-  //console.log(dataTask)
-  deleteTask(dataTask, showModal, userData);
+onMounted(getUserData); // Função para receber os dados
 
-  Swal.fire({
-    title: "Deletado!",
-    text: "O item foi deletado com sucesso.",
-    icon: "success"
+// Função para criar a nova tarefa com upload de imagem
+const createTask = async () => {
+  try {
+    // Cria o objeto para a nova tarefa
+    const newTask = {
+      title: newTaskTitle.value,
+      description: newTaskDescription.value,
+      local: newTaskLocal.value,
+      dataHora: newTaskDataHora.value,
+      status: newTaskStatus.value,
+      image: '' //'/public/uploads/train.jpg' // Imagem padrão
+    };
+
+    // Faz a requisição para adicionar a nova tarefa
+    const userId = userData.value[0].id; // ID do usuário
+    res.value = await axios.post(`http://localhost:3000/userData/${userId}/checklist`, newTask)
+    .then((res) => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Nova tarefa criada com sucesso!",
+        showConfirmButton: false,
+        text: res.data.message,
+        timer: 2100
+    });
+    })
+    
+    // Atualiza a lista de tarefas
+    getUserData();
+
+    // Reseta os campos do formulário após a criação
+    newTaskTitle.value = '';
+    newTaskDescription.value = '';
+    newTaskLocal.value = '';
+    newTaskDataHora.value = '';
+    newTaskStatus.value = 0;
+    fileUrl.value = ''
+
+    showCreateModalState.value = false;
+
+  } catch (error) {
+    console.error('Erro ao criar nova tarefa:', error);
+  }
+};
+
+// Função para upload de imagens
+let file = null;
+
+const handleFileChange = (event) => {
+  file = event.target.files[0];
+};
+
+const uploadFile = () => {
+  console.log('test')
+  let formData = new FormData();
+  formData.append('file', file);
+
+  axios.post('http://localhost:3000/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  .then(res => {
+    fileUrl.value = 'http://localhost:3000' + res.data.path;
+    dataTask.value.image = fileUrl.value; // Atualiza o campo 'image' em dataTask
+    console.log(res.data);
+  })
+  .catch(error => {
+    console.error('Erro ao enviar arquivo:', error);
   });
+};
 
-  getUserData(userData)
+// Função para atualizar item da checklist no servidor
+const updateTaskInServer = async () => {
+  try {
+    const userId = userData.value[0].id;
+    const checklistId = dataTask.value.id;
+    res.value = await axios.put(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value)
+    .then((res) => {
+      Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Card atualizado com sucesso!",
+      text: res.data.message,
+      showConfirmButton: false,
+      timer: 2100
+    });
+    })
+    // Atualiza a checklist após a atualização
+    getUserData();
+    showModal.value = false;
+  } catch (error) {
+    console.error('Erro ao atualizar item:', error);
+  }
+};
+
+
+const deleteTask = async () => {
+  try {
+    const userId = userData.value[0].id;
+    const checklistId = dataTask.value.id;
+    console.log(checklistId)
+    res.value = await axios.delete(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value)
+    .then((res) => {
+      Swal.fire({
+        title: "Deletado!",
+        text: res.data.message,
+        icon: "success",
+        timer: 2100
+      });
+      // Atualiza a checklist após a atualização
+      getUserData();
+    });
+    showModal.value = false;
+  } catch (error) {
+    console.error('Erro ao deletar item:', error);
+  }
 }
+
+// Função para exibir a descrição da task no hover
+//const showDescription = (user) => {
+  // Implemente aqui a lógica para exibir a descrição da task ao passar o mouse
+//  console.log(user.checklist[0].description);
+//};
+
+
 
 
 // Exibindo no console apenas para verificação
@@ -235,8 +271,8 @@ function onDeleteTask(dataTask) {
   color: #ffff;
 }
 .card {
-  width: 275px;
-  min-height: 295px;
+  width: 310px;
+  height: auto;
   padding: 6px;
   color: #ffff;
   border-radius: 15px;
