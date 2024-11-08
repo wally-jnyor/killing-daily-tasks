@@ -1,5 +1,7 @@
 # killing-daily-tasks
 
+# ToDo simples, com operações CRUD.
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
@@ -19,7 +21,7 @@ npm install
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev and npm start for json serve fakebackend
+npm run dev and node server.js, for serve fakebackend
 ```
 
 ### Compile and Minify for Production

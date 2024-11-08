@@ -126,7 +126,7 @@ const updateTaskInServer = async () => {
       showConfirmButton: false,
       timer: 1800
     });
-    // Atualiza a checklist após a atualização
+    
     getUserData();
   } catch (error) {
     console.error('Erro ao atualizar item:', error);

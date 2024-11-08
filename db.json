@@ -117,15 +117,6 @@
           "id": 8
         },
         {
-          "title": "Revisão de contrato",
-          "description": "Analisar contrato com fornecedor.",
-          "local": "Escritório",
-          "dataHora": "2024-11-23T10:30:00",
-          "status": 0,
-          "image": "",
-          "id": 9
-        },
-        {
           "title": "Atualização de software",
           "description": "Atualizar software de gerenciamento.",
           "local": "Departamento de TI",
@@ -171,7 +162,7 @@
           "id": 14
         },
         {
-          "title": "Organizar documentos",
+          "title": "Organizar documentos hhhh",
           "description": "Organizar arquivos físicos.",
           "local": "Arquivo",
           "dataHora": "2024-11-29T10:30:00",

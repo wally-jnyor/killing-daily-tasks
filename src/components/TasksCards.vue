@@ -108,7 +108,7 @@ onMounted(() => {
 
 function limitedItems() {
   if (this.userData.length > 0) {
-    return this.userData[0].checklist.slice(0, 8);
+    return this.userData[0].checklist.slice(0, 12);
   }
   return [];
 }

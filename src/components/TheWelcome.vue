@@ -13,7 +13,7 @@
 <style scoped>
 .main {
   width: 30%;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -33,8 +33,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
