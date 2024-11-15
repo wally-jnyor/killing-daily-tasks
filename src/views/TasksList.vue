@@ -66,6 +66,7 @@ const userData = ref([]);
 const showModal = ref(false);
 const dataTask = ref({});
 const fileUrl = ref('');
+const res = ref([]);
 
 const getUserData = async () => {
   try {
@@ -139,7 +140,7 @@ const deleteTask = async () => {
     const userId = userData.value[0].id;
     const checklistId = dataTask.value.id;
     console.log(checklistId)
-    const res = await axios.delete(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value)
+    res.value = await axios.delete(`http://localhost:3000/userData/${userId}/checklist/${checklistId}`, dataTask.value)
     .then((res) => {
       Swal.fire({
         title: "Deletado!",
@@ -147,7 +148,7 @@ const deleteTask = async () => {
         icon: "success"
       });
     });
-    console.log(res.data);
+    console.log(res.value.data);
     showModal.value = false;
     // Atualiza a checklist após a atualização
     getUserData();

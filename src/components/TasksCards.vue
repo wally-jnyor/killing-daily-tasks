@@ -1,10 +1,12 @@
 <template>
   <div class="container pt-2 mx-1" style="max-width:100%;">
-    <div class="create d-flex justify-content-end">
-      <button class="btn btn-success mr-3" @click="showCreateModalState = true" style="margin-right: 10px; border-radius: 15px;">Create new task</button>
-      <RouterLink to="/all-tasks" class="p-0">
-        <button class="btn btn-primary" style="border-radius: 15px;">Show All</button>
+    <div class="create d-flex justify-content-end my-3">
+      <RouterLink to="/all-tasks" class="p-0" style="margin-right: 10px; border-radius: 15px;">
+        <button class="btn btn-primary" style="border-radius: 15px; height:45px; ">Show All</button>
       </RouterLink>
+      <button class="btn btn-success mr-3" @click="showCreateModalState = true" style="margin-right: 10px; border-radius: 15px; height:45px;">
+        Create new task
+      </button>
     </div>
     <div>
       <div class="cards d-flex justify-content-evenly align-content-start align-items-baseline flex-wrap" 
@@ -108,7 +110,7 @@ onMounted(() => {
 
 function limitedItems() {
   if (this.userData.length > 0) {
-    return this.userData[0].checklist.slice(0, 12);
+    return this.userData[0].checklist.slice(0, 14);
   }
   return [];
 }
@@ -241,9 +243,8 @@ const deleteTask = async () => {
         icon: "success",
         timer: 2100
       });
-      // Atualiza a checklist após a atualização
-      getUserData();
     });
+    getUserData();
     showModal.value = false;
   } catch (error) {
     console.error('Erro ao deletar item:', error);

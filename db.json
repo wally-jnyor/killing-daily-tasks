@@ -50,7 +50,7 @@
           "local": "",
           "dataHora": "",
           "status": 0,
-          "image": "http://localhost:3000/uploads/988069.png",
+          "image": "http://localhost:3000/uploads/1350572.jpeg",
           "id": 1
         },
         {
@@ -63,39 +63,12 @@
           "id": 2
         },
         {
-          "title": "uoouuu",
-          "description": "uuuuuuu",
-          "local": "uu",
-          "dataHora": "",
-          "status": 0,
-          "image": "",
-          "id": 3
-        },
-        {
-          "title": "Revisão de código",
-          "description": "Revisão das novas funcionalidades implementadas.",
-          "local": "Remoto",
-          "dataHora": "2024-11-18T11:00:00",
-          "status": 0,
-          "image": "",
-          "id": 4
-        },
-        {
-          "title": "Compra de materiais",
-          "description": "Comprar suprimentos para o escritório.",
-          "local": "Loja de Material de Escritório",
-          "dataHora": "2024-11-19T15:30:00",
-          "status": 0,
-          "image": "",
-          "id": 5
-        },
-        {
           "title": "Ajuste de layout",
           "description": "Refinamento de layout da nova página do site.",
           "local": "Remoto",
           "dataHora": "2024-11-20T16:00:00",
           "status": 1,
-          "image": "http://localhost:3000/uploads/max-kouprov-HBibYOGsUi0-unsplash.jpg",
+          "image": "http://localhost:3000/uploads/1350572.jpeg",
           "id": 6
         },
         {
@@ -108,15 +81,6 @@
           "id": 7
         },
         {
-          "title": "Backup de dados",
-          "description": "Realizar backup completo dos dados do sistema.",
-          "local": "Servidores Internos",
-          "dataHora": "2024-11-22T01:00:00",
-          "status": 1,
-          "image": "http://localhost:3000/uploads/825213.png",
-          "id": 8
-        },
-        {
           "title": "Atualização de software",
           "description": "Atualizar software de gerenciamento.",
           "local": "Departamento de TI",
@@ -126,33 +90,6 @@
           "id": 10
         },
         {
-          "title": "Reunião de equipe",
-          "description": "Reunião semanal com todos os departamentos.",
-          "local": "Auditório",
-          "dataHora": "2024-11-25T08:00:00",
-          "status": 1,
-          "image": "",
-          "id": 11
-        },
-        {
-          "title": "Entrega de documentação",
-          "description": "Finalizar e entregar documentação técnica.",
-          "local": "Remoto",
-          "dataHora": "2024-11-26T17:00:00",
-          "status": 0,
-          "image": "",
-          "id": 12
-        },
-        {
-          "title": "Teste de funcionalidades",
-          "description": "Testes de integração no sistema.",
-          "local": "Laboratório de Testes",
-          "dataHora": "2024-11-27T13:00:00",
-          "status": 1,
-          "image": "",
-          "id": 13
-        },
-        {
           "title": "Contratação de serviço",
           "description": "Negociação de serviço de limpeza.",
           "local": "Sala de Reuniões",
@@ -160,15 +97,6 @@
           "status": 0,
           "image": "",
           "id": 14
-        },
-        {
-          "title": "Organizar documentos hhhh",
-          "description": "Organizar arquivos físicos.",
-          "local": "Arquivo",
-          "dataHora": "2024-11-29T10:30:00",
-          "status": 1,
-          "image": "",
-          "id": 15
         },
         {
           "title": "Manutenção do servidor",
@@ -187,15 +115,6 @@
           "status": 1,
           "image": "",
           "id": 17
-        },
-        {
-          "title": "Análise de orçamento",
-          "description": "Verificar orçamento para novas aquisições.",
-          "local": "Financeiro",
-          "dataHora": "2024-12-02T09:00:00",
-          "status": 0,
-          "image": "",
-          "id": 18
         },
         {
           "title": "Planejamento de férias",
