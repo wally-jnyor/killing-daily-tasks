@@ -1,10 +1,10 @@
 <template>
   <div class="container pt-2 mx-1" style="max-width:100%;">
     <div class="create d-flex justify-content-end my-3">
-      <RouterLink to="/all-tasks" class="p-0" style="margin-right: 10px; border-radius: 15px;">
-        <button class="btn btn-primary" style="border-radius: 15px; height:45px; ">Show All</button>
+      <RouterLink to="/all-tasks" class="p-0" style="margin-right: 10px; border-radius: 10px;">
+        <button class="btn btn-primary" style="border-radius: 10px; height:40px; ">Show All</button>
       </RouterLink>
-      <button class="btn btn-success mr-3" @click="showCreateModalState = true" style="margin-right: 10px; border-radius: 15px; height:45px;">
+      <button class="btn btn-success mr-3" @click="showCreateModalState = true" style="margin-right: 10px; border-radius: 10px; height:40px;">
         Create new task
       </button>
     </div>
@@ -44,9 +44,9 @@
         <template #body>
           <div class="flex-column w-100">
             <label class="text-light">Title</label>
-            <textarea v-model="dataTask.title" class="form-control mb-3" name="title" type="" id="title"></textarea>
+            <input v-model="dataTask.title" class="form-control mb-3" name="title" type="" id="title">
             <label class="text-light">Description</label>
-            <input v-model="dataTask.description" class="form-control" name="description" id="description">
+            <textarea v-model="dataTask.description" class="form-control" name="description" id="description"></textarea>
           </div>
         </template>
         <template #footer>
@@ -67,12 +67,6 @@
             <textarea v-model="newTaskTitle" class="form-control mb-3" name="title" type="" id="title"></textarea>
             <label class="text-light">Description</label>
             <input v-model="newTaskDescription" class="form-control" name="description" id="description">
-            <label class="text-light">Local</label>
-            <input v-model="newTaskLocal" class="form-control" name="local" id="local">
-            <label class="text-light">Data e Hora</label>
-            <input v-model="newTaskDataHora" class="form-control" type="datetime-local" name="dataHora" id="dataHora">
-            <label class="text-light">Status</label>
-            <input v-model="newTaskStatus" class="form-control" type="number" name="status" id="status">
           </div>
         </template>
         <template #footer>
@@ -110,7 +104,7 @@ onMounted(() => {
 
 function limitedItems() {
   if (this.userData.length > 0) {
-    return this.userData[0].checklist.slice(0, 14);
+    return this.userData[0].checklist.slice(0, 10);
   }
   return [];
 }
@@ -272,14 +266,13 @@ const deleteTask = async () => {
   color: #ffff;
 }
 .card {
-  width: 310px;
+  width: 240px;
   height: auto;
   padding: 6px;
   color: #ffff;
-  border-radius: 15px;
+  border-radius: 10px;
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.13);
-  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(14.9px);
   -webkit-backdrop-filter: blur(14.9px);
@@ -288,13 +281,13 @@ const deleteTask = async () => {
 .image {
   width: 100%;
   height: 150px;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 .image img{
   width: 100%;
   height: 150px;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 .actions {
   width: 100%;
@@ -306,7 +299,7 @@ const deleteTask = async () => {
   height: 35px;
   background-color: #14d697;
   font-size: .88rem;
-  border-radius: 15px;
+  border-radius: 10px;
   border: none;
   color: #000;
 }
@@ -314,7 +307,6 @@ const deleteTask = async () => {
   color: #ffff;
   /* From https://css.glass */
   background: rgba(20, 214, 151, 0.68);
-  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);

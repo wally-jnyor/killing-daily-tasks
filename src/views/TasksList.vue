@@ -1,5 +1,10 @@
 <template>
-  <div class="container p-3 m-0 d-flex justify-content-center flex-column-reverse">
+  <div class="container p-3 m-0 d-flex justify-content-center flex-column">
+    <div class="actions-page py-3 w-100 d-flex justify-content-end align-items-center">
+      <router-link to="/" class="navigationList">
+        <button class="btn btn-success">Home</button>
+      </router-link>
+    </div>
     <Teleport to="body">
       <Modal :show="showModal" @close="showModal = false">
         <template #header>
@@ -45,13 +50,6 @@
           <button class="btn btn-primary" id="show-modal" @click="updateTask(task)">Details</button>
         </div>
       </div>
-    </div>
-    <div class="actions-page py-3 w-100 d-flex justify-content-start align-items-center">
-      <li class="navigationList">
-        <router-link to="/">
-          <button class="btn btn-success">Home</button>
-        </router-link>
-      </li>
     </div>
   </div>
 </template>
@@ -173,14 +171,14 @@ const deleteTask = async () => {
 }
 
 .card {
-  width: 270px;
+  width: 240px;
   height: auto;
   padding: 6px;
   color: #ffff;
   border-radius: 15px;
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.13);
-  border-radius: 16px;
+  border-radius: 10px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(14.9px);
   -webkit-backdrop-filter: blur(14.9px);
@@ -190,14 +188,14 @@ const deleteTask = async () => {
 .image {
   width: 100%;
   height: 150px;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .image img {
   width: 100%;
   height: 150px;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .actions.actions-page {
@@ -211,7 +209,7 @@ const deleteTask = async () => {
   height: 35px;
   background-color: #14d697;
   font-size: 0.88rem;
-  border-radius: 15px;
+  border-radius: 10px;
   border: none;
   color: #000;
 }
@@ -221,7 +219,7 @@ button:hover {
   color: #ffff;
   /* From https://css.glass */
   background: rgba(20, 214, 151, 0.68);
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -232,7 +230,6 @@ button:hover {
   color: #ffff;
   /* From https://css.glass */
   background: rgba(20, 214, 151, 0.68);
-  border-radius: 15px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -241,7 +238,7 @@ button:hover {
 
 .navigationList button {
   width: 200px;
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: #14d697;
   color: #000;
 }
