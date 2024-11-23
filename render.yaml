@@ -1,0 +1,11 @@
+# Exported from Render on 2024-11-23T16:10:01Z
+services:
+- type: web
+  name: killing-daily-tasks
+  runtime: node
+  repo: https://github.com/wally-jnyor/killing-daily-tasks
+  plan: free
+  region: oregon
+  buildCommand: npm install; npm run build; node run server.js;
+  startCommand: npm run start
+version: "1"
